@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -90,8 +92,9 @@ public class Main {
 //        isPermutation(permOne, permTwo);
         ArrayList<String> toWords = new ArrayList<>();
         toWords.add("The quick brown fox");
+        String testData = "The quick brown fox";
 
-//        stringToListOfWords(toWords);
+//        stringToListOfWords(testData);
 
 
         ArrayList<String> test = new ArrayList<>();
@@ -99,7 +102,20 @@ public class Main {
         test.add("quick,");
         test.add("fox.");
         test.add("went.,.,");
-        sanitizeString(test, "(\\w+)");
+//        sanitizeString(test, "(\\w+)");
+
+
+        ArrayList<Integer> testRemove = new ArrayList<>();
+
+        testRemove.add(1);
+        testRemove.add(4);
+        testRemove.add(5);
+        testRemove.add(6);
+        testRemove.add(5);
+        testRemove.add(5);
+        testRemove.add(2);
+
+        removeAllInstances(testRemove, 5);
 
 
 
@@ -202,38 +218,26 @@ public class Main {
 
 
 
-    public static ArrayList<String> stringToListOfWords(Array inputString){
-//        String regexToCheck = "fox";
-//
-//        Pattern checkRegex = Pattern.compile(regexToCheck);
-//        Matcher regexMatcher = checkRegex.matcher(regexPattern);
-//        System.out.println(inputString);
+    public static ArrayList<String> stringToListOfWords(String inputString){
 
+        String[] test = inputString.split("(\\w+)");
 
-
-
-        ArrayList sanitize = sanitizeString(inputString,"(\\w+)");
-
-        List<String> helper = new asString(inputString);
+        List<String>  arr;
+        arr = Arrays.asList(inputString.split("[, . @]+"));
 
         ArrayList<String> result = new ArrayList<>();
-        result =
 
-
-        for (int i = 0; i < string.size(); i++) {
-
-
-
-
+        for (String item : arr) {
+            result.add(item);
+            result.add(",");
+            System.out.println(item);
         }
 
-
-        return string;
+        return result;
     }
 
     public static ArrayList<String> sanitizeString(ArrayList<String> inputString, String regexPattern){
 
-//        String test = inputString;
 
         ArrayList<String> sanitizedString = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
@@ -245,7 +249,6 @@ public class Main {
 
         String arrToString = sb.toString();
         System.out.println(arrToString);
-
 
         Pattern checkRegex = Pattern.compile(regexPattern);
 
@@ -260,4 +263,17 @@ public class Main {
 
 
 
-}
+    public static ArrayList<Integer> removeAllInstances(List<Integer> input, Integer item){
+
+        for (int i = 0; i < input.size() ; i++) {
+            if(input.get(i).equals(item)){
+//                System.out.println(input.get(i));
+                input.remove(i);
+                i--;
+            }
+        }
+        return (ArrayList<Integer>) input;
+    }
+
+
+}//end main()
